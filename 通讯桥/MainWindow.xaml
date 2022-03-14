@@ -1,0 +1,51 @@
+﻿<Window x:Class="通讯桥.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:通讯桥"
+        mc:Ignorable="d"
+        FontSize="15"
+        Topmost="True"
+        WindowStyle="ToolWindow"
+        WindowState="{Binding windowState,Mode=TwoWay,UpdateSourceTrigger=Default}"
+        ResizeMode="NoResize"
+        Title="MainWindow" Height="600" Width="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="通讯桥数目：" VerticalAlignment="Center"/>
+            <ComboBox Width="100" Height="20" SelectedIndex="{Binding SelectIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="4"/>
+            </ComboBox>
+            <Button Content="连接" Width="80" Margin="5" Command="{Binding ConnectCommand}"/>
+            <Button Content="断开" Width="80" Margin="5" Command="{Binding DisconnectCommand}"/>
+            <Button Content="最小化" Width="80" Margin="5" Command="{Binding MinimizedCommand}"/>
+        </StackPanel>
+
+        <TabControl Grid.Row="1">
+            <TabItem Header="通讯桥-1">
+                <local:CommunicationCtrl DataContext="{Binding communications[0]}"/>
+            </TabItem>
+
+            <TabItem Header="通讯桥-2">
+                <local:CommunicationCtrl DataContext="{Binding communications[1]}"/>
+            </TabItem>
+
+            <TabItem Header="通讯桥-3">
+                <local:CommunicationCtrl DataContext="{Binding communications[2]}"/>
+            </TabItem>
+
+            <TabItem Header="通讯桥-4">
+                <local:CommunicationCtrl DataContext="{Binding communications[3]}"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
